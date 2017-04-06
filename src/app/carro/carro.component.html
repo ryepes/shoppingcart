@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <br/>
+        <br/>
+        <br/>
+        <h3> Productos Seleccionados </h3>
+        <p class="bg-info" *ngIf="cartEntities && cartEntities.length == 0">Usted no tiene articulos seleccionados para la compra en este momento!!</p>
+        <div class="table-responsive">
+            <table class="table table-hover" *ngIf="cartEntities &&  cartEntities.length > 0">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th class="hidden-xs">Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <!--<th class="text-center">Sub Total</th>-->
+                        <th></th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cartEntity of cartEntities">
+                        <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <p href="#">{{cartEntity.product.description}}</p>
+                                    </h4>
+                                    <span>Estado: </span><span class="text-success"><strong>Disponibles</strong></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-1 col-md-1 hidden-xs" style="text-align: center">
+                            <span (click)=changeQuantity(cartEntity.product.id,-1) class="glyphicon glyphicon-minus pointer"></span> {{cartEntity.quantity}} <span (click)=changeQuantity(cartEntity.product.id,1) class="glyphicon glyphicon-plus pointer"></span>
+                        </td>
+                        <td class="col-sm-1 col-md-3 hidden-xs"><strong>$ {{cartEntity.product.price}}</strong></td>
+                        <!--<td class="col-sm-1 col-md-1 text-center"><strong>{{cartEntity.product.price | sum: cartEntity.quantity}}</strong></td>-->
+                        <td></td>
+                        <td class="col-sm-1 col-md-1">
+                            <button type="button" (click)=removeByProductId(cartEntity.product.id) class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span> Quitar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h3>Total:</h3>
+                        </td>
+                        <td class="text-right">
+                            <h3><strong>$ {{ totalSum }}</strong></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="hidden-xs">   </td>
+                        <td class="hidden-xs">   </td>
+                        <td></td>
+                        <td>
+                            <button (click)=goToShopping() type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Continuar Comprando
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">
+                                Ir a Pagar <span class="glyphicon glyphicon-play"></span>
+                        </button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

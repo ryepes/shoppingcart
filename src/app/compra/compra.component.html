@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="product-list-header col-sm-12 col-md-10 col-md-offset-1">
+        <br/>
+        <br/>
+        <br/>
+        <div class="col-sm-6 ">
+            <h3>Productos para la venta</h3>
+        </div>
+        <div class="col-sm-6 ">
+            <br/>
+            <input type="text" class="form-control" [(ngModel)]="filterVal" placeholder="Escriba aquí para filtrar" (keyup)="filter()">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="product-list col-sm-12 col-md-10 col-md-offset-1">
+        <p class="bg-info" *ngIf="visibleProducts && visibleProducts.length == 0">No se encontraron articulos con el filtro actual!</p>
+        <div class="row product-item" *ngFor="let product of products" [class.selected]="product === selectedProduct" (click)="onSelect(product)">
+            <div class="col-sm-10">
+                <h3>{{product.description}}</h3>
+                <div class="stockstatus small">
+                    <span class="stockstatus-availability-label">Disponibilidad:</span>
+                    <span class="stockstatus-stock-details">{{product.stockQuantity}} articulos</span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="row">
+                    <p class="product-price-now">Precio: $ {{product.price}}</p>
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary add-to-cart-button" (click)="appendItem(product)">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
